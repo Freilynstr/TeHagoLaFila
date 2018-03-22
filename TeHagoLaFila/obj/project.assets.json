@@ -13131,11 +13131,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Freilyn Tavárez\\OneDrive\\Universidad\\5to Cuatrimestre\\Programacion III\\Proyecto\\TeHagoLaFila\\TeHagoLaFila\\TeHagoLaFila.csproj",
+      "projectUniqueName": "C:\\Users\\Freilyn Tavárez\\Documents\\GitHub\\TeHagoLaFila\\TeHagoLaFila\\TeHagoLaFila\\TeHagoLaFila.csproj",
       "projectName": "TeHagoLaFila",
-      "projectPath": "C:\\Users\\Freilyn Tavárez\\OneDrive\\Universidad\\5to Cuatrimestre\\Programacion III\\Proyecto\\TeHagoLaFila\\TeHagoLaFila\\TeHagoLaFila.csproj",
+      "projectPath": "C:\\Users\\Freilyn Tavárez\\Documents\\GitHub\\TeHagoLaFila\\TeHagoLaFila\\TeHagoLaFila\\TeHagoLaFila.csproj",
       "packagesPath": "C:\\Users\\Freilyn Tavárez\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Freilyn Tavárez\\OneDrive\\Universidad\\5to Cuatrimestre\\Programacion III\\Proyecto\\TeHagoLaFila\\TeHagoLaFila\\obj\\",
+      "outputPath": "C:\\Users\\Freilyn Tavárez\\Documents\\GitHub\\TeHagoLaFila\\TeHagoLaFila\\TeHagoLaFila\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackagesFallback\\",
