@@ -3,16 +3,21 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using TeHagoLaFila.Models;
 
 namespace TeHagoLaFila.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
+
         public IActionResult Index()
         {
-            return View();
+                return View();
         }
 
         public IActionResult About()
