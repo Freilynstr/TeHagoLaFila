@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
@@ -57,11 +58,50 @@ namespace TeHagoLaFila.Controllers
         public async Task<IActionResult> Login(LoginViewModel model, string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
+
+            if (model.Email.IndexOf('@') > -1)
+            {
+                //Validate email format
+                string emailRegex = @"^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}" +
+                                       @"\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\" +
+                                          @".)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$";
+                Regex re = new Regex(emailRegex);
+                if (!re.IsMatch(model.Email))
+                {
+                    ModelState.AddModelError("Email", "Email is not valid");
+                }
+            }
+            else
+            {
+                //validate Username format
+                string emailRegex = @"^[a-zA-Z0-9]*$";
+                Regex re = new Regex(emailRegex);
+                if (!re.IsMatch(model.Email))
+                {
+                    ModelState.AddModelError("Email", "Username is not valid");
+                }
+            }
+
+
             if (ModelState.IsValid)
             {
+                var userName = model.Email;
+                if (userName.IndexOf('@') > -1)
+                {
+                    var user = await _userManager.FindByEmailAsync(model.Email);
+                    if (user == null)
+                    {
+                        ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                        return View(model);
+                    }
+                    else
+                    {
+                        userName = user.UserName;
+                    }
+                }
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-                var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
+                var result = await _signInManager.PasswordSignInAsync(userName, model.Password, model.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
@@ -220,7 +260,7 @@ namespace TeHagoLaFila.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { Name = model.Name, LastName = model.LastName, Gender = model.Gender, UserName = model.Username, Email = model.Email };
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -239,6 +279,10 @@ namespace TeHagoLaFila.Controllers
 
             // If we got this far, something failed, redisplay form
             return View(model);
+        }
+        public JsonResult EmailExists(string email)
+        {
+            return Json(!String.Equals(email, "ehsansajjad@yahoo.com", StringComparison.OrdinalIgnoreCase));
         }
 
         [HttpPost]

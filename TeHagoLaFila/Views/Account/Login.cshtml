@@ -42,9 +42,9 @@
                             <form asp-route-returnurl="@ViewData["ReturnUrl"]" method="post">
                                 <div asp-validation-summary="All" class="text-danger"></div>
                                 <!--Email Input with Verification-->
-                                <div class="form-group validate-input" data-validate="Valid email is required: ex@abc.xyz">
-                                    <label for="email">E-Mail Address</label>
-                                    <input asp-for="Email" type="email" class="form-control" placeholder="E-mail" value="" required autofocus />
+                                <div class="form-group validate-input" data-validate="Valid email or username is required">
+                                    <label for="email">Username or E-Mail</label>
+                                    <input asp-for="Email" type="text" class="form-control" placeholder="Username / E-mail" value="" required autofocus />
                                     <span asp-validation-for="Email" class="text-danger"></span>
                                 </div>
                                 <!--Password Input with Verification and Forgot-->

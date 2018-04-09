@@ -8,8 +8,10 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using TeHagoLaFila.Data;
 using TeHagoLaFila.Models;
 using TeHagoLaFila.Models.ManageViewModels;
 using TeHagoLaFila.Services;
@@ -20,6 +22,7 @@ namespace TeHagoLaFila.Controllers
     [Route("[controller]/[action]")]
     public class ManageController : Controller
     {
+        private readonly ApplicationDbContext context;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IEmailSender _emailSender;
@@ -30,12 +33,14 @@ namespace TeHagoLaFila.Controllers
         private const string RecoveryCodesKey = nameof(RecoveryCodesKey);
 
         public ManageController(
+          ApplicationDbContext context,
           UserManager<ApplicationUser> userManager,
           SignInManager<ApplicationUser> signInManager,
           IEmailSender emailSender,
           ILogger<ManageController> logger,
           UrlEncoder urlEncoder)
         {
+            this.context = context;
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
@@ -57,6 +62,9 @@ namespace TeHagoLaFila.Controllers
 
             var model = new IndexViewModel
             {
+                Name = user.Name,
+                LastName = user.LastName,
+                Gender = user.Gender,
                 Username = user.UserName,
                 Email = user.Email,
                 PhoneNumber = user.PhoneNumber,
@@ -81,7 +89,18 @@ namespace TeHagoLaFila.Controllers
             {
                 throw new ApplicationException($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
+            var email = user.Email;
+            var name = user.Name;
+            var LastName = user.LastName;
+            var phoneNumber = user.PhoneNumber;
 
+            user.Email = model.Email;
+            user.Name = model.Name;
+            user.LastName = model.LastName;
+            user.Gender = model.Gender;
+            user.PhoneNumber = model.PhoneNumber;
+
+            /*
             var email = user.Email;
             if (model.Email != email)
             {
@@ -91,7 +110,25 @@ namespace TeHagoLaFila.Controllers
                     throw new ApplicationException($"Unexpected error occurred setting email for user with ID '{user.Id}'.");
                 }
             }
+            var name = user.Name;
+            if (model.Name != name)
+            {
+                var setNameResult = await _userManager.UpdateAsync(user);
+                if (!setNameResult.Succeeded)
+                {
+                    throw new ApplicationException($"Unexpected error occurred setting name for user with ID '{user.Id}'.");
+                }
+            }
 
+            var LastName = user.LastName;
+            if (model.LastName != LastName)
+            {
+                var setLastNameResult = await _userManager.SetLastNameAsync(user, model.LastName);
+                if (!setLastNameResult.Succeeded)
+                {
+                    throw new ApplicationException($"Unexpected error occurred setting last name for user with ID '{user.Id}'.");
+                }
+            }
             var phoneNumber = user.PhoneNumber;
             if (model.PhoneNumber != phoneNumber)
             {
@@ -100,8 +137,9 @@ namespace TeHagoLaFila.Controllers
                 {
                     throw new ApplicationException($"Unexpected error occurred setting phone number for user with ID '{user.Id}'.");
                 }
-            }
+            }*/
 
+            var setNameResult = await _userManager.UpdateAsync(user);
             StatusMessage = "Your profile has been updated";
             return RedirectToAction(nameof(Index));
         }

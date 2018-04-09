@@ -28,40 +28,46 @@
 
 <body>
     <div class="wrapper">
-        <div class="sidebar" data-color="blue" data-image="images/sidebar-4.jpg">
+        <div class="sidebar" data-color="blue" data-image="~/images/sidebar-4.jpg">
             <div class="sidebar-wrapper">
                 <div class="logo">
-                    <a href="http://www.creative-tim.com" class="simple-text">
+                    <a class="simple-text" asp-area="" asp-controller="Home" asp-action="Index" title="Home">
                         TeHagoLaFila
                     </a>
                 </div>
                 <ul class="nav">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index" title="Dashboard">
                             <i class="nc-icon nc-chart-pie-35"></i>
-                            <p>Dashboard</p>
+                            <p>DashBoard</p>
                         </a>
                     </li>
                     <li>
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" asp-area="" asp-controller="Negocio" asp-action="Index" title="Negocios">
+                            <i class="nc-icon nc-bag"></i>
+                            <p>Negocios</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="nav-link" asp-area="" asp-controller="Manage" asp-action="Index" title="Profile">
                             <i class="nc-icon nc-circle-09"></i>
                             <p>User Profile</p>
                         </a>
                     </li>
                     <li>
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="#Favoritos">
                             <i class="nc-icon nc-favourite-28"></i>
                             <p>Favoritos</p>
                         </a>
                     </li>
                     <li>
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="#Maps">
                             <i class="nc-icon nc-pin-3"></i>
                             <p>Maps</p>
                         </a>
                     </li>
                     <li>
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="#Notifications">
                             <i class="nc-icon nc-bell-55"></i>
                             <p>Notifications</p>
                         </a>
@@ -73,7 +79,7 @@
             <!-- Navbar -->
             <nav class="navbar navbar-expand-lg " color-on-scroll="500">
                 <div class=" container-fluid  ">
-                    <a class="navbar-brand" href="#pablo">Search <i class="nc-icon nc-zoom-split"></i></a>
+                    <a class="navbar-brand" href="#Search">Search <i class="nc-icon nc-zoom-split"></i></a>
 
                     <button href="" class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-bar burger-lines"></span>
@@ -83,19 +89,9 @@
                     <div class="collapse navbar-collapse justify-content-end" id="navigation">
                         <ul class="navbar-nav ml-auto">
                             <li class="nav-item">
-                                <a class="nav-link" href="#pablo">
+                                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index" title="Home">
                                     <span class="no-icon">Home</span>
                                 </a>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <span class="no-icon">Negocios <i class="nc-icon nc-bag"></i></span>
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                    <a class="dropdown-item" href="#">Barberías <i class="nc-icon nc-key-25"></i></a>
-                                    <div class="divider"></div>
-                                    <a class="dropdown-item" href="#">Salones<i class="nc-icon nc-lock-circle-open"></i></a>
-                                </div>
                             </li>
                             <li class="nav-item">
                                 @await Html.PartialAsync("_LoginPartial")
@@ -105,6 +101,8 @@
                 </div>
             </nav>
             <!-- End Navbar -->
+
+            <!--Body-->
             <div class="content">
                 <div class="container-fluid">
                     <div class="section">
@@ -112,35 +110,9 @@
                     </div>
                 </div>
             </div>
+            <!--End Body-->
 
-            <!--
-                <nav class="navbar navbar-inverse navbar-fixed-top">
-                    <div class="container">
-                        <div class="navbar-header">
-                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                                <span class="sr-only">Toggle navigation</span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                            </button>
-                            <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">TeHagoLaFila</a>
-                        </div>
-                        <div class="navbar-collapse collapse">
-                            <ul class="nav navbar-nav navbar-right">
-                                <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                                <li class="dropdown">
-                                    <a class="dropdown-toggle" data-toggle="dropdown" asp-area="" asp-controller="Home" asp-action="About">Negocios <span class="caret"></span></a>
-                                    <ul class="dropdown-menu">
-                                        <li><a asp-area="" asp-controller="Home" asp-action="About">Barberías</a></li>
-                                        <li><a asp-area="" asp-controller="Home" asp-action="About">Salones de belleza</a></li>
-                                    </ul>
-                                </li>
-                                <li><a asp-area="" asp-controller="Home" asp-action="Contact">FAQ</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </nav>
-        -->
+            <!--Footer-->
             <footer class="footer">
                 <div class="container">
                     <nav>
@@ -161,6 +133,7 @@
                     </nav>
                 </div>
             </footer>
+            <!--End Footer-->
         </div>
     </div>
 

@@ -17,8 +17,8 @@ C:\Users\Freilyn Tavárez\Documents\GitHub\TeHagoLaFila\TeHagoLaFila\TeHagoLaFil
 C:\Users\Freilyn Tavárez\Documents\GitHub\TeHagoLaFila\TeHagoLaFila\TeHagoLaFila\bin\Debug\netcoreapp2.0\TeHagoLaFila.pdb
 C:\Users\Freilyn Tavárez\Documents\GitHub\TeHagoLaFila\TeHagoLaFila\TeHagoLaFila\obj\Debug\netcoreapp2.0\TeHagoLaFila.csprojResolveAssemblyReference.cache
 C:\Users\Freilyn Tavárez\Documents\GitHub\TeHagoLaFila\TeHagoLaFila\TeHagoLaFila\obj\Debug\netcoreapp2.0\TeHagoLaFila.csproj.CoreCompileInputs.cache
-C:\Users\Freilyn Tavárez\Documents\GitHub\TeHagoLaFila\TeHagoLaFila\TeHagoLaFila\obj\Debug\netcoreapp2.0\UserSecretsAssemblyInfo.cs
 C:\Users\Freilyn Tavárez\Documents\GitHub\TeHagoLaFila\TeHagoLaFila\TeHagoLaFila\obj\Debug\netcoreapp2.0\TeHagoLaFila.AssemblyInfoInputs.cache
 C:\Users\Freilyn Tavárez\Documents\GitHub\TeHagoLaFila\TeHagoLaFila\TeHagoLaFila\obj\Debug\netcoreapp2.0\TeHagoLaFila.AssemblyInfo.cs
 C:\Users\Freilyn Tavárez\Documents\GitHub\TeHagoLaFila\TeHagoLaFila\TeHagoLaFila\obj\Debug\netcoreapp2.0\TeHagoLaFila.dll
 C:\Users\Freilyn Tavárez\Documents\GitHub\TeHagoLaFila\TeHagoLaFila\TeHagoLaFila\obj\Debug\netcoreapp2.0\TeHagoLaFila.pdb
+C:\Users\Freilyn Tavárez\Documents\GitHub\TeHagoLaFila\TeHagoLaFila\TeHagoLaFila\obj\Debug\netcoreapp2.0\UserSecretsAssemblyInfo.cs

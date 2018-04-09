@@ -22,5 +22,15 @@ namespace TeHagoLaFila.Data
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
         }
+
+        public DbSet<TeHagoLaFila.Models.CategoriaNegocio> CategoriaNegocio { get; set; }
+
+        public DbSet<TeHagoLaFila.Models.CategoriaEmpleado> CategoriaUsuario { get; set; }
+
+        public DbSet<TeHagoLaFila.Models.Negocio> Negocio { get; set; }
+
+        public DbSet<TeHagoLaFila.Models.Empleado> Empleado { get; set; }
+
+        public DbSet<TeHagoLaFila.Models.Reservacion> Reservacion { get; set; }
     }
 }

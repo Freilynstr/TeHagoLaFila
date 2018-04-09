@@ -166,6 +166,7 @@ namespace TeHagoLaFila.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedEmail")
+                        .IsUnique()
                         .HasName("EmailIndex");
 
                     b.HasIndex("NormalizedUserName")
