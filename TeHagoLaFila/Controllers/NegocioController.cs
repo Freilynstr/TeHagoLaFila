@@ -20,9 +20,15 @@ namespace TeHagoLaFila.Controllers
         }
 
         // GET: Negocio
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? id)
         {
-            return View(await _context.Negocio.ToListAsync());
+            if(id == null)
+            {
+                return NotFound();
+            }
+
+            var negocio = await _context.Negocio.Where(m => m.CategoriaNegocioID == id).ToListAsync();
+            return View(negocio);
         }
 
         // GET: Negocio/Details/5

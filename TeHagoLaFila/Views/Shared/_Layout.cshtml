@@ -28,7 +28,7 @@
 
 <body>
     <div class="wrapper">
-        <div class="sidebar" data-color="blue" data-image="~/images/sidebar-4.jpg">
+        <div class="sidebar" data-color="blue" data-image="/images/sidebar-4.jpg">
             <div class="sidebar-wrapper">
                 <div class="logo">
                     <a class="simple-text" asp-area="" asp-controller="Home" asp-action="Index" title="Home">
@@ -36,6 +36,14 @@
                     </a>
                 </div>
                 <ul class="nav">
+
+                    <li class="nav-item active">
+                        <a class="nav-link" asp-area="" asp-controller="CategoriaNegocio" asp-action="Index" title="Reservar un turno">
+                            <i class="nc-icon nc-notes"></i>
+                            <p>Reservar turno</p>
+                        </a>
+                    </li>
+
                     <li class="nav-item">
                         <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index" title="Dashboard">
                             <i class="nc-icon nc-chart-pie-35"></i>
@@ -43,7 +51,7 @@
                         </a>
                     </li>
                     <li>
-                        <a class="nav-link" asp-area="" asp-controller="Negocio" asp-action="Index" title="Negocios">
+                        <a class="nav-link" asp-area="" asp-controller="CategoriaNegocio" asp-action="Index" title="Negocios">
                             <i class="nc-icon nc-bag"></i>
                             <p>Negocios</p>
                         </a>

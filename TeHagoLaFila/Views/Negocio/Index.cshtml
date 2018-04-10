@@ -4,14 +4,41 @@
     ViewData["Title"] = "Index";
 }
 
-<h2>Index</h2>
+@if (User.IsInRole("PowerUser"))
+{
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+}
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
+<div class="row">
+    @foreach (var item in Model)
+    {
+        var imageRoute = "/images/Negocio/negocio.png";
+    <div class='col-sm-3 col-lg-3 col-md-3'>
+        
+        <center>
+            
+            <a asp-controller="Negocio" asp-action="Details" asp-route-id="@item.NegocioID">
+                <div class="border border-gray rounded">
+                    <img width="150" height="150" class="rounded" src="@imageRoute">
+                    <div class="caption">
+                        <h5>@Html.DisplayFor(modelItem => item.Nombre)</h5>
+                        <p>@item.Direccion</p>
+                    </div>
+                </div>
+            </a>
+
+        </center>
+    </div>
+    }
+</div>
+
+@if (User.IsInRole("PowerUser"))
+{
+    <table class="table">
+        <thead>
+            <tr>
                 <th>
                     @Html.DisplayNameFor(model => model.Nombre)
                 </th>
@@ -21,27 +48,29 @@
                 <th>
                     @Html.DisplayNameFor(model => model.Direccion)
                 </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nombre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Descripcion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Direccion)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.NegocioID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.NegocioID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.NegocioID">Delete</a>
-            </td>
-        </tr>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Nombre)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Descripcion)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Direccion)
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.NegocioID">Edit</a> |
+                            <a asp-action="Details" asp-route-id="@item.NegocioID">Details</a> |
+                            <a asp-action="Delete" asp-route-id="@item.NegocioID">Delete</a>
+                        </td>
+                    </tr>
+                }
+        </tbody>
+    </table>
 }
-    </tbody>
-</table>

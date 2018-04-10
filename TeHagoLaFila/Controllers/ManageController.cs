@@ -89,16 +89,26 @@ namespace TeHagoLaFila.Controllers
             {
                 throw new ApplicationException($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
-            var email = user.Email;
-            var name = user.Name;
-            var LastName = user.LastName;
-            var phoneNumber = user.PhoneNumber;
+            var email = model.Email;
+            var username = model.Username;
+            var name = model.Name;
+            var lastName = model.LastName;
+            var gender = model.Gender;
+            var phoneNumber = model.PhoneNumber;
 
-            user.Email = model.Email;
-            user.Name = model.Name;
-            user.LastName = model.LastName;
-            user.Gender = model.Gender;
-            user.PhoneNumber = model.PhoneNumber;
+            
+            
+            if((user.Name != name) || (user.LastName != lastName) || (user.PhoneNumber != phoneNumber))
+            {
+                user.Name = name;
+                user.LastName = lastName;
+                user.PhoneNumber = phoneNumber;
+                var setNameResult = await _userManager.UpdateAsync(user);
+                StatusMessage = "Your profile has been updated";
+                return RedirectToAction(nameof(Index));
+            }
+            return RedirectToAction(nameof(Index));
+
 
             /*
             var email = user.Email;
@@ -139,9 +149,7 @@ namespace TeHagoLaFila.Controllers
                 }
             }*/
 
-            var setNameResult = await _userManager.UpdateAsync(user);
-            StatusMessage = "Your profile has been updated";
-            return RedirectToAction(nameof(Index));
+
         }
 
         [HttpPost]

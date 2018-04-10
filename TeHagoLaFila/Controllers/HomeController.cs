@@ -14,14 +14,32 @@ namespace TeHagoLaFila.Controllers
     [Authorize]
     public class HomeController : Controller
     {
+        private readonly UserManager<ApplicationUser> userManager;
+        private readonly RoleManager<IdentityRole> roleManager;
+
+        public HomeController(UserManager<ApplicationUser> userManager,
+            RoleManager<IdentityRole> roleManager
+            )
+        {
+            this.userManager = userManager;
+            this.roleManager = roleManager;
+        }
 
         public IActionResult Index()
         {
-                return View();
+
+            return View();
         }
 
         public IActionResult About()
         {
+            /*if (User.Identity.IsAuthenticated)
+            {
+                await roleManager.CreateAsync(new IdentityRole("PowerUser"));
+                var user = await userManager.GetUserAsync(HttpContext.User);
+                await userManager.AddToRoleAsync(user, "PowerUser");
+            }*/
+
             ViewData["Message"] = "Your application description page.";
 
             return View();

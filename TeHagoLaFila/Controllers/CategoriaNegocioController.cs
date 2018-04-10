@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +11,7 @@ using TeHagoLaFila.Models;
 
 namespace TeHagoLaFila.Controllers
 {
+    
     public class CategoriaNegocioController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -20,12 +22,14 @@ namespace TeHagoLaFila.Controllers
         }
 
         // GET: CategoriaNegocio
+
         public async Task<IActionResult> Index()
         {
             return View(await _context.CategoriaNegocio.ToListAsync());
         }
 
         // GET: CategoriaNegocio/Details/5
+        [Authorize(Roles = "PowerUser")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -44,6 +48,7 @@ namespace TeHagoLaFila.Controllers
         }
 
         // GET: CategoriaNegocio/Create
+        [Authorize(Roles = "PowerUser")]
         public IActionResult Create()
         {
             return View();
@@ -54,7 +59,7 @@ namespace TeHagoLaFila.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CategoriaNegocioID,Nombre,Descripcion,Estado")] CategoriaNegocio categoriaNegocio)
+        public async Task<IActionResult> Create([Bind("CategoriaNegocioID,Nombre,Descripcion")] CategoriaNegocio categoriaNegocio)
         {
             if (ModelState.IsValid)
             {
@@ -66,6 +71,7 @@ namespace TeHagoLaFila.Controllers
         }
 
         // GET: CategoriaNegocio/Edit/5
+        [Authorize(Roles = "PowerUser")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -86,7 +92,8 @@ namespace TeHagoLaFila.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CategoriaNegocioID,Nombre,Descripcion,Estado")] CategoriaNegocio categoriaNegocio)
+        [Authorize(Roles = "PowerUser")]
+        public async Task<IActionResult> Edit(int id, [Bind("CategoriaNegocioID,Nombre,Descripcion")] CategoriaNegocio categoriaNegocio)
         {
             if (id != categoriaNegocio.CategoriaNegocioID)
             {
@@ -117,6 +124,7 @@ namespace TeHagoLaFila.Controllers
         }
 
         // GET: CategoriaNegocio/Delete/5
+        [Authorize(Roles = "PowerUser")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -137,6 +145,7 @@ namespace TeHagoLaFila.Controllers
         // POST: CategoriaNegocio/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "PowerUser")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var categoriaNegocio = await _context.CategoriaNegocio.SingleOrDefaultAsync(m => m.CategoriaNegocioID == id);
