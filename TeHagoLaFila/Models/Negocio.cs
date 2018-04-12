@@ -27,6 +27,7 @@ namespace TeHagoLaFila.Models
         [Display(Name = "Dirección")]
         public string Direccion { get; set; }
 
+        public ICollection<Empleado> Empleado { get; set; }
 
         public CategoriaNegocio CategoriaNegocio { get; set; }
     }

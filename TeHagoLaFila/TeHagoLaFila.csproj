@@ -8,6 +8,10 @@
   <ItemGroup>
     <Compile Remove="Data\Migrations\20180407173740_Migracion.cs" />
     <Compile Remove="Data\Migrations\20180407174325_MigrationNLN.cs" />
+    <Compile Remove="Data\Migrations\20180412003118_Migracion11042018-2.cs" />
+    <Compile Remove="Data\Migrations\20180412003643_AyudaDePache.cs" />
+    <Compile Remove="Data\Migrations\20180412005359_MigracionDeAhora2.cs" />
+    <Compile Remove="Migrations\20180412010519_InitialMigration2.cs" />
   </ItemGroup>
 
 

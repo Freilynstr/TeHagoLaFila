@@ -11,9 +11,10 @@ using TeHagoLaFila.Data;
 namespace TeHagoLaFila.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180411225240_Migracion11042018")]
+    partial class Migracion11042018
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -289,6 +290,10 @@ namespace TeHagoLaFila.Data.Migrations
 
                     b.HasKey("ReservacionID");
 
+                    b.HasIndex("ApplicationUserID");
+
+                    b.HasIndex("EmpleadoID");
+
                     b.ToTable("Reservacion");
                 });
 
@@ -360,6 +365,19 @@ namespace TeHagoLaFila.Data.Migrations
                     b.HasOne("TeHagoLaFila.Models.CategoriaNegocio", "CategoriaNegocio")
                         .WithMany()
                         .HasForeignKey("CategoriaNegocioID")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("TeHagoLaFila.Models.Reservacion", b =>
+                {
+                    b.HasOne("TeHagoLaFila.Models.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("ApplicationUserID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("TeHagoLaFila.Models.Empleado", "Empleado")
+                        .WithMany()
+                        .HasForeignKey("EmpleadoID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

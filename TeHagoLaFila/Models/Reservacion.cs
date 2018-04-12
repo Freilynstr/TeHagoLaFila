@@ -14,7 +14,7 @@ namespace TeHagoLaFila.Models
         [Display(Name = "Usuario")]
         public string ApplicationUserID { get; set; }
 
-        [Required(ErrorMessage = "El campo empleado no debe estar en blanco ")]
+        [Required(ErrorMessage = "El campo negocio no debe estar en blanco")]
         [Display(Name = "Empleado")]
         public int EmpleadoID { get; set; }
 
@@ -24,7 +24,7 @@ namespace TeHagoLaFila.Models
 
         public DateTime? EndAllTimes { get; set; }
 
-        public ApplicationUser ApplicationUser;
-        public Empleado Empleado;
+        public ApplicationUser ApplicationUser { get; set; }
+        public Empleado Empleado { get; set; }
     }
 }

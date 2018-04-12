@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -10,13 +12,22 @@ using TeHagoLaFila.Models;
 
 namespace TeHagoLaFila.Controllers
 {
+    [Authorize(Roles = "PowerUser, Administrador")]
     public class EmpleadoController : Controller
     {
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly ApplicationDbContext _context;
 
-        public EmpleadoController(ApplicationDbContext context)
+        public EmpleadoController(
+            ApplicationDbContext context,
+            UserManager<ApplicationUser> userManager,
+            SignInManager<ApplicationUser> signInManager
+            )
         {
             _context = context;
+            _userManager = userManager;
+            _signInManager = signInManager;
         }
 
         // GET: Empleado
@@ -43,26 +54,23 @@ namespace TeHagoLaFila.Controllers
             return View(empleado);
         }
 
-        // GET: Empleado/Create
-        public IActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Empleado/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        // Empleado/Create
         public async Task<IActionResult> Create([Bind("EmpleadoID")] Empleado empleado)
         {
-            if (ModelState.IsValid)
-            {
+            
+                empleado.ApplicationUser = await _userManager.GetUserAsync(HttpContext.User);
+                empleado.ApplicationUserID = _userManager.GetUserId(HttpContext.User);
+                empleado.CategoriaEmpleadoID = 1;
+                empleado.CategoriaEmpleado = await _context.CategoriaUsuario.FirstOrDefaultAsync(m => m.CategoriaEmpleadoID == empleado.CategoriaEmpleadoID);
+                empleado.NegocioID =   _context.Negocio.LastOrDefault().NegocioID;
+                empleado.Negocio = await _context.Negocio.FirstOrDefaultAsync(m => m.NegocioID == empleado.NegocioID);
+
                 _context.Add(empleado);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(empleado);
+                return RedirectToAction("Index", "Home");
+            
+
+            return NotFound();
         }
 
         // GET: Empleado/Edit/5

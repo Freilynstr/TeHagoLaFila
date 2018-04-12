@@ -2,6 +2,10 @@
   "iisSettings": {
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
+    "iis": {
+      "applicationUrl": "http://localhost/TeHagoLaFila",
+      "sslPort": 0
+    },
     "iisExpress": {
       "applicationUrl": "http://localhost:59298/",
       "sslPort": 44301
@@ -23,6 +27,9 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
       "applicationUrl": "http://localhost:59299/"
+    },
+    "newFreilynProfile": {
+      "commandName": "IIS"
     }
   }
 }

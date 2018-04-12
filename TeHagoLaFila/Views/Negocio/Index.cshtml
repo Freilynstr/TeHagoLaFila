@@ -16,20 +16,21 @@
     {
         var imageRoute = "/images/Negocio/negocio.png";
     <div class='col-sm-3 col-lg-3 col-md-3'>
-        
-        <center>
-            
-            <a asp-controller="Negocio" asp-action="Details" asp-route-id="@item.NegocioID">
-                <div class="border border-gray rounded">
-                    <img width="150" height="150" class="rounded" src="@imageRoute">
-                    <div class="caption">
-                        <h5>@Html.DisplayFor(modelItem => item.Nombre)</h5>
-                        <p>@item.Direccion</p>
+        <div class="card">
+            <center>
+                <a asp-controller="Negocio" asp-action="Details" asp-route-id="@item.NegocioID">
+                    <div class="border border-gray rounded">
+                        <br />
+                        <img width="150" height="150" class="rounded border" src="@imageRoute">
+                        <div class="caption">
+                            <h5>@Html.DisplayFor(modelItem => item.Nombre)</h5>
+                            <hr />
+                            <p><small>@item.Direccion</small></p>
+                        </div>
                     </div>
-                </div>
-            </a>
-
-        </center>
+                </a>
+            </center>
+        </div>
     </div>
     }
 </div>

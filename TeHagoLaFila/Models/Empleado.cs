@@ -20,10 +20,12 @@ namespace TeHagoLaFila.Models
 
         [Required]
         [Display(Name = "Tipo de Empleado")]
-        public int CategoriaEmpleadoID { get; set; }
-
+        public int CategoriaEmpleadoID { get; set;}
+        
         public Negocio Negocio { get; set; }
         public CategoriaEmpleado CategoriaEmpleado { get; set; }
         public ApplicationUser ApplicationUser { get; set; }
+
+        public ICollection<Reservacion> Reservacion { get; set; }
     }
 }

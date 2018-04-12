@@ -4,60 +4,23 @@
     ViewData["Title"] = "Index";
 }
 
-@if (User.IsInRole("PowerUser"))
-{
-    <p>
-        <a asp-action="Create">Create New</a>
-    </p>
-}
-
-<div class="row">
-    @foreach (var item in Model)
-    {
-        var imageRoute = "/images/categoriaNegocio/iconos/" + item.Nombre + ".png";
-        <div class='col col-xs-6'>
-            <center>
-                <a asp-controller="Negocio" asp-action="Index" asp-route-id="@item.CategoriaNegocioID">
-                    <div>
-                        <img width="250" height="250" class="img img-rounded border" src="@imageRoute">
-                    </div>
-                    <h4>@Html.DisplayFor(modelItem => item.Nombre)</h4>
-                </a>
-            </center>
-        </div>
-    }
-</div>
-@if (User.IsInRole("PowerUser"))
-{
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Nombre)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Descripcion)
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
+    <div class="card">
+        <br />
+        <div class="row">
             @foreach (var item in Model)
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Nombre)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Descripcion)
-                    </td>
-                    <td>
-                        <a asp-action="Edit" asp-route-id="@item.CategoriaNegocioID">Edit</a> |
-                        <a asp-action="Details" asp-route-id="@item.CategoriaNegocioID">Details</a> |
-                        <a asp-action="Delete" asp-route-id="@item.CategoriaNegocioID">Delete</a>
-                    </td>
-                </tr>
+                var imageRoute = "/images/categoriaNegocio/iconos/" + item.Nombre + ".png";
+                <div class='col col-xs-6'>
+                    <div class="col col-xs-3">
+                        <center>
+                            <a asp-controller="Negocio" asp-action="Index" asp-route-id="@item.CategoriaNegocioID">
+                                <img width="250" height="250" class="rounded-circle border border-dark" src="@imageRoute">
+                                <h4>@Html.DisplayFor(modelItem => item.Nombre)</h4>
+                            </a>
+                        </center>
+                    </div>
+                </div>
             }
-        </tbody>
-    </table>
-}
+        </div>
+        <br />
+    </div>

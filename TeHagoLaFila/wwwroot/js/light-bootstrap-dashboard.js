@@ -28,6 +28,12 @@ var mobile_menu_visible = 0,
     $sidebar,
     isWindows;
 
+$(document).ready(function () {
+    $('[data-toggle="toggle"]').change(function () {
+        $(this).parents().next('.hide').toggle();
+    });
+});
+
 $(document).ready(function() {
     window_width = $(window).width();
 

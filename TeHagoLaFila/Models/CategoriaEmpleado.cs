@@ -18,5 +18,7 @@ namespace TeHagoLaFila.Models
         [Required(ErrorMessage = "La categoría debe tener una descripción.")]
         [StringLength(256, MinimumLength = 2, ErrorMessage = "La descripción debe tener entre 2 y 256 caracteres.")]
         public string Descripcion { get; set; }
+
+        public ICollection<Empleado> Empleado { get; set; }
     }
 }

@@ -21,5 +21,7 @@ namespace TeHagoLaFila.Models
         public string Gender { get; set; }
 
         public byte[] Image { get; set; }
+
+        public ICollection<Empleado> Empleado { get; set; }
     }
 }

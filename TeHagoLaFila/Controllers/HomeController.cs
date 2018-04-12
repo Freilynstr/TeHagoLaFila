@@ -17,7 +17,8 @@ namespace TeHagoLaFila.Controllers
         private readonly UserManager<ApplicationUser> userManager;
         private readonly RoleManager<IdentityRole> roleManager;
 
-        public HomeController(UserManager<ApplicationUser> userManager,
+        public HomeController(
+            UserManager<ApplicationUser> userManager,
             RoleManager<IdentityRole> roleManager
             )
         {
