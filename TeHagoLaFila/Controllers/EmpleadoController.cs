@@ -12,7 +12,6 @@ using TeHagoLaFila.Models;
 
 namespace TeHagoLaFila.Controllers
 {
-    [Authorize(Roles = "PowerUser, Administrador")]
     public class EmpleadoController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
@@ -33,7 +32,15 @@ namespace TeHagoLaFila.Controllers
         // GET: Empleado
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Empleado.ToListAsync());
+            //Variable para cargar los datos del usuario logueado
+            var User = _userManager.GetUserId(HttpContext.User);
+            //Variable que me da el NegocioID de mi negocio
+            int NegocioID = 0;
+
+            var empleado = await _context.Empleado.SingleOrDefaultAsync(m => m.ApplicationUserID.Equals(User));
+            NegocioID = empleado.NegocioID;
+            //return Ok(NegocioID);
+            return View(await _context.Empleado.Where(m => m.NegocioID == NegocioID).ToListAsync());            
         }
 
         // GET: Empleado/Details/5
@@ -55,21 +62,21 @@ namespace TeHagoLaFila.Controllers
         }
 
         // Empleado/Create
-        public async Task<IActionResult> Create([Bind("EmpleadoID")] Empleado empleado)
+        public async Task<IActionResult> Create(Empleado empleado)
         {
-            
+            if (User.Identity.IsAuthenticated)
+            {
                 empleado.ApplicationUser = await _userManager.GetUserAsync(HttpContext.User);
                 empleado.ApplicationUserID = _userManager.GetUserId(HttpContext.User);
                 empleado.CategoriaEmpleadoID = 1;
                 empleado.CategoriaEmpleado = await _context.CategoriaUsuario.FirstOrDefaultAsync(m => m.CategoriaEmpleadoID == empleado.CategoriaEmpleadoID);
-                empleado.NegocioID =   _context.Negocio.LastOrDefault().NegocioID;
+                empleado.NegocioID = _context.Negocio.LastOrDefault().NegocioID;
                 empleado.Negocio = await _context.Negocio.FirstOrDefaultAsync(m => m.NegocioID == empleado.NegocioID);
 
                 _context.Add(empleado);
                 await _context.SaveChangesAsync();
-                return RedirectToAction("Index", "Home");
-            
-
+                return RedirectToAction("Desloguearme", "Account");
+            }
             return NotFound();
         }
 

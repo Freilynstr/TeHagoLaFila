@@ -22,7 +22,7 @@ namespace TeHagoLaFila.Controllers
     [Route("[controller]/[action]")]
     public class ManageController : Controller
     {
-        private readonly ApplicationDbContext context;
+        private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IEmailSender _emailSender;
@@ -40,7 +40,7 @@ namespace TeHagoLaFila.Controllers
           ILogger<ManageController> logger,
           UrlEncoder urlEncoder)
         {
-            this.context = context;
+            _context = context;
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
@@ -108,48 +108,6 @@ namespace TeHagoLaFila.Controllers
                 return RedirectToAction(nameof(Index));
             }
             return RedirectToAction(nameof(Index));
-
-
-            /*
-            var email = user.Email;
-            if (model.Email != email)
-            {
-                var setEmailResult = await _userManager.SetEmailAsync(user, model.Email);
-                if (!setEmailResult.Succeeded)
-                {
-                    throw new ApplicationException($"Unexpected error occurred setting email for user with ID '{user.Id}'.");
-                }
-            }
-            var name = user.Name;
-            if (model.Name != name)
-            {
-                var setNameResult = await _userManager.UpdateAsync(user);
-                if (!setNameResult.Succeeded)
-                {
-                    throw new ApplicationException($"Unexpected error occurred setting name for user with ID '{user.Id}'.");
-                }
-            }
-
-            var LastName = user.LastName;
-            if (model.LastName != LastName)
-            {
-                var setLastNameResult = await _userManager.SetLastNameAsync(user, model.LastName);
-                if (!setLastNameResult.Succeeded)
-                {
-                    throw new ApplicationException($"Unexpected error occurred setting last name for user with ID '{user.Id}'.");
-                }
-            }
-            var phoneNumber = user.PhoneNumber;
-            if (model.PhoneNumber != phoneNumber)
-            {
-                var setPhoneResult = await _userManager.SetPhoneNumberAsync(user, model.PhoneNumber);
-                if (!setPhoneResult.Succeeded)
-                {
-                    throw new ApplicationException($"Unexpected error occurred setting phone number for user with ID '{user.Id}'.");
-                }
-            }*/
-
-
         }
 
         [HttpPost]

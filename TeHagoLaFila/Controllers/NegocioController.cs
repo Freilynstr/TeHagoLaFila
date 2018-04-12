@@ -105,19 +105,26 @@ namespace TeHagoLaFila.Controllers
             {
                 
                 var negocio = new Negocio {
-                    Nombre = model.Nombre,
-                    Descripcion = model.Descripcion,
-                    Direccion = model.Direccion,
-                    CategoriaNegocioID = model.CategoriaNegocioID
-                };
+                        Nombre = model.Nombre,
+                        Descripcion = model.Descripcion,
+                        Direccion = model.Direccion,
+                        CategoriaNegocioID = model.CategoriaNegocioID
+                    };
                 _context.Add(negocio);
                 await _context.SaveChangesAsync();
 
                 if (User.Identity.IsAuthenticated)
                 {
-                    await _roleManager.CreateAsync(new IdentityRole("Administrador"));
-                    var user = await _userManager.GetUserAsync(HttpContext.User);
-                    await _userManager.AddToRoleAsync(user, "Administrador");
+                    if (!User.IsInRole("Empleado"))
+                    {
+                        var user = await _userManager.GetUserAsync(HttpContext.User);
+                        await _userManager.AddToRoleAsync(user, "Empleado");
+                    }
+                    if (!User.IsInRole("Administrador"))
+                    {
+                        var user = await _userManager.GetUserAsync(HttpContext.User);
+                        await _userManager.AddToRoleAsync(user, "Administrador");
+                    } 
                 }
                 return RedirectToAction("Create", "Empleado");
             }
@@ -226,7 +233,7 @@ namespace TeHagoLaFila.Controllers
 
         public async Task<IActionResult> ListarNegocios()
         {
-            var negociosList = "";
+            var negociosList = _context.Negocio.ToListAsync();
 
             return Ok(negociosList);
 

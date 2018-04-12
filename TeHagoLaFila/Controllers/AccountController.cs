@@ -285,6 +285,13 @@ namespace TeHagoLaFila.Controllers
             return Json(!String.Equals(email, "ehsansajjad@yahoo.com", StringComparison.OrdinalIgnoreCase));
         }
 
+        public async Task<IActionResult> Desloguearme()
+        {
+            await _signInManager.SignOutAsync();
+            _logger.LogInformation("User logged out.");
+            return RedirectToAction(nameof(HomeController.Index), "Home");
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Logout()
